@@ -1,0 +1,51 @@
+mission "electron beam 1"
+    name "Test some new Navy tech"
+    description `Go to Valhalla in the Epsilon Leonis system and help the Republic Navy test a new piece of technology they have been working on. Payment is 100,000 credits.`
+    deadline
+    destination Valhalla
+    source
+        government "Republic"
+    to offer
+        # TODO: Add offer condition
+    on offer
+        conversation
+            `   You are strolling around the spaceport when a Navy officer and a squad of troops approaches you. "Captain <last>," he addresses you, "I have an urgent message for you, from High Command. I'll need to take you aboard my ship before I can tell you any more."`
+            choice
+                `   "Is this a trick?"`
+                `   "Thanks, but no."`
+                    goto no
+                `   "Okay."`
+                    goto yes
+            `   "I'm afraid not, Captain. I know you want to ask what we could possibly need you for, but I'm not allowed to tell you until we're in a secure area."`
+            choice
+                `   "All right."`
+                `   "I don't think so."`
+                    goto no
+            label yes
+            `   "Thank you for your cooperation, Captain. Follow me, please."`
+            `   The officer and his heavily armed companions lead you across the spaceport to the section reserved for Navy warships. He takes you over to the boarding ramp of a giant Cruiser, and you go inside.`
+            `   Your escort says nothing until you reach the captain's quarters. The captain, a middle-aged, gray-haired man with a square jaw, shakes your hand and gestures for you to take a seat. No one speaks until the officer (who has the insignia of a lieutenant) seals the door behind you.`
+            `   Finally the captain speaks. "Captain <last>, I apologize for the secrecy involved in getting you here. I personally don't think it's necessary, but High Command wants this kept under wraps, so that's the way it has to be.`
+            `   "All I can tell you at this moment is that we are developing a new piece of technology. Nothing that really needs to be kept secret at this point --- it's nearing completion and will be deployed on the battlefield soon. There is, however, one more step to the development process.`
+            `   "As you know, our efforts to put down the Free Worlds insurrection have been... less than successful. There are a lot of factors, but mainly it's because all of our most experienced officers and crewers are tied up defending the panicked Paradise Worlds, where they aren't even needed." There is bitterness in his voice as he mentions this, but he regains his composure and continues, "Not to mention, precious few of our officers have training for an actual warfare scenario --- we're used to dealing with simple pirates.`
+            `   "Because of this, we need people with hands-on experience in ship outfitting. We've been ordered to research independent captains that operate in the Republic that have experience in these matters, and to hire them to test our tech. Now, you won't get to actually use it --- that will be handled by our crewmen. All we need you to do is accompany a Cruiser on a test drive to take out some local pirates, observe how the device works, and give us your professional opinion. There will, of course, be payment." He slides an official-looking document across the desk towards you.`
+            choice
+                `   "What is this mystery gadget?"`
+                `   "Sure, sounds fun."`
+                    goto document
+                `   "Nah, I'm not interested."`
+                    goto nah
+            `   "Unfortunately, I can't tell you until you sign this document. The Free Worlds would undoubtedly pay a handsome sum to find out what we've been doing in our labs."`
+            choice
+                `   (Sign the paper).`
+                `   "No thank you, I'm not interested."`
+                    goto nah
+            `   You give the document a quick scan: the payment is one hundred thousand credits, and punishment for leaking the classified information is a charge of treason. Everything seems to be in order, so you sign your name: <first> <last>.`
+            `   The captain thanks you and shakes your hand. "You are to report to the Navy base on Valhalla, in the Epsilon Leonis system. You'll be told what to do from there. And once again, thank you for your time." The captain bids you farewell and the lieutenant escorts you back to your ship.`
+                accept
+            label no
+            `   "Understood. Apologies for interrupting you." The officer turns and heads back across the spaceport.`
+                defer
+            label nah
+            `   "Well then, I'm sorry for the inconvenience, Captain. Please, feel free to go about your business." The captain ushers you out the door, and you are taken back to your ship by the lieutenant and his men.`
+                defer
