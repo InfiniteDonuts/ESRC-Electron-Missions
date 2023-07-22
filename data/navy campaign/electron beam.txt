@@ -1,12 +1,14 @@
-mission "electron beam 1"
+mission "electron beam 0"
     name "Test some new Navy tech"
     description `Go to Valhalla in the Epsilon Leonis system and help the Republic Navy test a new piece of technology they have been working on. Payment is 100,000 credits.`
     deadline
     destination Valhalla
     source
         government "Republic"
+        not planet "Valhalla"
     to offer
-        # TODO: Add offer condition
+        has "event: war begins"
+        random < 30
     on offer
         conversation
             `   You are strolling around the spaceport when a Navy officer and a squad of troops approaches you. "Captain <last>," he addresses you, "I have an urgent message for you, from High Command. I'll need to take you aboard my ship before I can tell you any more."`
@@ -26,9 +28,9 @@ mission "electron beam 1"
             `   The officer and his heavily armed companions lead you across the spaceport to the section reserved for Navy warships. He takes you over to the boarding ramp of a giant Cruiser, and you go inside.`
             `   Your escort says nothing until you reach the captain's quarters. The captain, a middle-aged, gray-haired man with a square jaw, shakes your hand and gestures for you to take a seat. No one speaks until the officer (who has the insignia of a lieutenant) seals the door behind you.`
             `   Finally the captain speaks. "Captain <last>, I apologize for the secrecy involved in getting you here. I personally don't think it's necessary, but High Command wants this kept under wraps, so that's the way it has to be.`
-            `   "All I can tell you at this moment is that we are developing a new piece of technology. Nothing that really needs to be kept secret at this point --- it's nearing completion and will be deployed on the battlefield soon. There is, however, one more step to the development process.`
-            `   "As you know, our efforts to put down the Free Worlds insurrection have been... less than successful. There are a lot of factors, but mainly it's because all of our most experienced officers and crewers are tied up defending the panicked Paradise Worlds, where they aren't even needed." There is bitterness in his voice as he mentions this, but he regains his composure and continues, "Not to mention, precious few of our officers have training for an actual warfare scenario --- we're used to dealing with simple pirates.`
-            `   "Because of this, we need people with hands-on experience in ship outfitting. We've been ordered to research independent captains that operate in the Republic that have experience in these matters, and to hire them to test our tech. Now, you won't get to actually use it --- that will be handled by our crewmen. All we need you to do is accompany a Cruiser on a test drive to take out some local pirates, observe how the device works, and give us your professional opinion. There will, of course, be payment." He slides an official-looking document across the desk towards you.`
+            `   "All I can tell you at this moment is that we are developing a new piece of technology. Nothing that really needs to be kept secret at this point; it's nearing completion and will be deployed on the battlefield soon. There is, however, one more step to the development process.`
+            `   "As you know, our efforts to put down the Free Worlds insurrection have been... less than successful. There are a lot of factors, but mainly it's because all of our most experienced officers and crewers are tied up defending the panicked Paradise Worlds, where they aren't even needed." There is bitterness in his voice as he mentions this, but he regains his composure and continues, "Not to mention, precious few of our officers have training for an actual warfare scenario; we're used to dealing with simple pirates.`
+            `   "Because of this, we need people with hands-on experience in ship outfitting. We've been ordered to research independent captains that operate in the Republic that have experience in these matters, and to hire them to test our tech. Now, you won't get to actually use it; that will be handled by our crewmen. All we need you to do is accompany a Cruiser on a test drive to take out some local pirates, observe how the device works, and give us your professional opinion. There will, of course, be payment." He slides an official-looking document across the desk towards you.`
             choice
                 `   "What is this mystery gadget?"`
                 `   "Sure, sounds fun."`
@@ -40,6 +42,7 @@ mission "electron beam 1"
                 `   (Sign the paper).`
                 `   "No thank you, I'm not interested."`
                     goto nah
+            label document
             `   You give the document a quick scan: the payment is one hundred thousand credits, and punishment for leaking the classified information is a charge of treason. Everything seems to be in order, so you sign your name: <first> <last>.`
             `   The captain thanks you and shakes your hand. "You are to report to the Navy base on Valhalla, in the Epsilon Leonis system. You'll be told what to do from there. And once again, thank you for your time." The captain bids you farewell and the lieutenant escorts you back to your ship.`
                 accept
@@ -49,3 +52,71 @@ mission "electron beam 1"
             label nah
             `   "Well then, I'm sorry for the inconvenience, Captain. Please, feel free to go about your business." The captain ushers you out the door, and you are taken back to your ship by the lieutenant and his men.`
                 defer
+    
+mission "electron beam 1"
+    name "Test some new Navy tech"
+    description `A pirate ship called the Profit Margin was last seen in the Fala system. Track it down so that the R.M.S. Hebron can test its new electron beams on it. Then, escort the Hebron back to Valhalla in the Epsilon Leonis system for a payment of 100,000 credits.`
+    to offer
+        has "electron beam 0: done"
+    source "Valhalla"
+    destination "Valhalla"
+    landing
+    on offer
+        conversation
+            `   When you land on Valhalla, you report to the Navy base near the spaceport. When you reach the address that the captain gave you, two big Navy guards search you thoroughly before you are allowed inside. You then find the office's reception desk. The officer there looks vaguely surprised at seeing a civilian here.`
+            choice
+                `   "Hi, I'm <first> <last>. I was told to come here to help test some new technology?"`
+                `   "I am <first> <last>, murderer of pirates and tester of technology!"`
+            `   The officer seems confused at first, but when you give him the note from the Navy captain, he immediately knows what to do. "This way, Captain <last>," he says, and leads you down a long hallway of offices and conference rooms.`
+            `   You finally reach the office of another Navy captain, a tall man who looks to be in his mid-30s. He shakes your hand and invites you to take a seat. "Captain <last>, I'm Captain Lowell of the R.M.S. Hebron. I understand you're quite experienced in ship outfitting."`
+            choice
+                `   "Yes, sir!"`
+                `   "I'll do my best."`
+            `   Lowell gives you a friendly smile. "Excellent. In that case, it's time for me to reveal to you what this new tech is!" He pulls back a curtain to reveal that this office overlooks a massive docking bay where a Navy Cruiser sits.`
+            `   However, this Cruiser's standard-issue Heavy Lasers seem almost comically oversized, to the point that you realize that those turrets could only be the new mystery gadget that the Navy is so eager to test out. "We call it the Electron Beam, Captain <last>," says Lowell. "Very similar to the typical Heavy Lasers, but these things have upgraded power and range. Now, we've got most of the kinks worked out; all we need to do now is field testing. That's where you come in.`
+            `   "There's a pirate cruiser that has been harassing merchant ships a few jumps south of us. It's called the Profit Margin, and it usually pops up in the Fala system to mess with the supply routes going to and from the Delta Velorum system. So, we're going to kill two birds with one stone and test our new Electron Turrets on it. My ship, the Hebron, will do all the heavy lifting; all you have to do is sit back and pay attention to the guns' performance. Afterward, escort us back and give us your opinion. Sound good?"`
+            choice
+                `   "Absolutely!"`
+                `   (Nod).`
+            `   "Excellent. See you up there, Captain." An officer escorts you out of the building to your ship, and you prepare to follow the R.M.S. Hebron into space.`
+                accept
+    npc accompany
+        government "Republic"
+        personality daring opportunistic ramming launching
+        ship "Cruiser (Mark II)" "R.M.S. Hebron"
+        system "Epsilon Leonis"
+    npc kill
+        government "Pirate"
+        personality staying heroic plunders
+        ship "Leviathan" "Profit Margin"
+        system "Fala"
+        on kill
+            dialog `    The Profit Margin has been destroyed. Now, escort Captain Lowell back to Valhalla to collect your payment.`
+
+mission "electron beam 2"
+    name "Test some new Navy tech"
+    description `A pirate ship called the Profit Margin was last seen in the Fala system. Track it down so that the R.M.S. Hebron can test its new electron beams on it. Then, escort the Hebron back to Valhalla in the Epsilon Leonis system for a payment of 100,000 credits.`
+    source "Valhalla"
+    landing
+    to offer
+        has "electron beam 1: done"
+    on offer
+        conversation
+            `   Back at the Navy Base in Valhalla, Captain Lowell invites you to take a seat in his office once again, this time accompanied by a Navy engineer. "So, Captain <last>," he says casually, "what are your thoughts on our new weapon?"`
+            choice
+                `   "Very impressive. It's definitely an upgrade over the old Heavy Lasers."`
+                    goto impressive
+                `   "I feel like it's so big that you might have problems with heat and energy, but otherwise it performed well."`
+                    goto problems
+                `   "Personally, I don't see the point in replacing all your perfectly good Heavy Lasers with these."`
+            `   The captain frowns. "Not what I think at all, but still a valid point. They're not terribly efficient. However, our engineers are the very best, and they should be able to come up with ways around that." In a seat behind him, the engineer takes notes.`
+                goto departure
+            label impressive
+            `   He gives you his signature friendly smile. "My thoughts exactly, Captain. We're going to need to cram all the firepower we can get onto our capital ships if we're going to restore order down South."`
+                goto departure
+            label problems
+            `   "You make a good point, Captain. Personally, I love the amount of firepower it adds to our Cruisers and Carriers, but it's still not as efficient as it could be. However, our engineers are the best at what they do, and I'm confident they can make it our new capital ship weapon in no time."`
+            label departure
+            `   The captain unlocks a cabinet in the corner of a room, and pulls out a bottle of whiskey and three crystal glasses. "Now, drinking is typically frowned upon by the military powers that be, but I think this occasion deserves a toast." He hands you and the engineer each a glass. "To a successful test!"`
+            `   You take the captain and his chief engineer over the finer details of the weapon's performance as you all finish your drinks. When you've finished, Captain Lowell shakes your hand. "Pleasure working with you, Captain. I'll have your payment sent over immediately." With another friendly smile, he bids you safe travels as another officer escorts you back to your ship.`
+        payment 100000
